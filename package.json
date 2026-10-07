@@ -1,0 +1,24 @@
+{
+  "name": "sr-inspecao-painel",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Painel de qualidade da inspeção visual — Situação real do webforge",
+  "type": "module",
+  "workspaces": ["packages/*", "apps/*"],
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c blue,magenta \"npm run dev -w @qi/api\" \"npm run dev -w @qi/web\"",
+    "build": "npm run build -w @qi/web",
+    "start": "npm run build && npm run start -w @qi/api",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "central": "node tools/central/cli.mjs qualidade"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.0",
+    "playwright": "1.61.1",
+    "typescript": "^5.8.3"
+  }
+}
